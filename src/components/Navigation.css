@@ -1,0 +1,25 @@
+nav {
+  display: flex;
+  align-items: center;
+  min-width: 100%;
+  width: 100%;
+}
+
+nav h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  color: var(--clr-primary-a0);
+}
+
+nav ul {
+  list-style-type: none;
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: end;
+  padding: 0;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
