@@ -1,4 +1,33 @@
 #root {
+
+  /** Base colors */
+  --clr-dark-a0: #000000;
+  --clr-light-a0: #ffffff;
+
+  /** Theme primary colors */
+  --clr-primary-a0: #52e487;
+  --clr-primary-a10: #6de894;
+  --clr-primary-a20: #83eba2;
+  --clr-primary-a30: #97eeaf;
+  --clr-primary-a40: #aaf2bc;
+  --clr-primary-a50: #bcf5c9;
+
+  /** Theme surface colors */
+  --clr-surface-a0: #121212;
+  --clr-surface-a10: #282828;
+  --clr-surface-a20: #3f3f3f;
+  --clr-surface-a30: #575757;
+  --clr-surface-a40: #717171;
+  --clr-surface-a50: #8b8b8b;
+
+  /** Theme tonal surface colors */
+  --clr-surface-tonal-a0: #1b241d;
+  --clr-surface-tonal-a10: #303932;
+  --clr-surface-tonal-a20: #464e48;
+  --clr-surface-tonal-a30: #5e6560;
+  --clr-surface-tonal-a40: #777d78;
+  --clr-surface-tonal-a50: #919691;
+
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -11,9 +40,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +53,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
