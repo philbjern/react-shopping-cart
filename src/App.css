@@ -31,10 +31,14 @@
   height: 100vh;
   margin: 0;
   text-align: left;
+
+  --container-max-width: 1280px;
+  --grid-columns-number: 5;
+  --grid-padding: 2rem;
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--container-max-width);
   min-height: 80vh;
   margin: 0 auto;
   padding: 2rem
