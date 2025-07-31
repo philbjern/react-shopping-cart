@@ -15,7 +15,7 @@ const Cart = () => {
     cart.forEach(item => {
       total += item.product.price * item.amount;
     });
-    return total;
+    return Math.floor(total * 100) / 100;
   }
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Cart = () => {
       {cart && cart.map(item => (
         <CartRow key={item.product.id} product={item.product} amount={item.amount} />
       ))}
-      <p>Total: {total} USD</p>
+      <p>Total: <span className="total">{total} USD</span></p>
       <div className="cart-controls">
         <button onClick={handleCheckout}>Checkout</button>
         <button onClick={handleClearCartClick}>Clear cart</button>

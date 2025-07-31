@@ -1,3 +1,7 @@
 .cart-controls button {
   margin-right: 0.7rem;
 }
+
+.total {
+  font-size: 1.8rem;
+}

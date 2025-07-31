@@ -40,6 +40,10 @@
   --bg-dark-1: var(--clr-surface-a20);
 }
 
+body {
+  position: relative;
+}
+
 .container {
   max-width: var(--container-max-width);
   min-height: 80vh;
@@ -49,4 +53,22 @@
 
 a {
   color: var(--clr-primary-a30)
+}
+
+.notifications-container {
+  position: absolute;
+  width: 100vh;
+  top: 20px;
+  left: 0;
+  z-index: 10;
+}
+
+.notification {
+  max-width: 500px;
+  padding: 1rem;
+  margin: 0 auto;
+  background-color: var(--clr-primary-a50);
+  color: var(--clr-dark-a0);
+  border-radius: var(--border-radius);
+  margin-bottom: 0.8rem;
 }

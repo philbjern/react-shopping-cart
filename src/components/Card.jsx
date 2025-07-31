@@ -27,7 +27,7 @@ const Card = ({ product, handleAddToCart }) => {
         <div>
         <p className="price">Price: {product.price} USD</p>
       </div>
-      <div class="controls">
+      <div className="controls">
         <input type="number" value={itemCount} onChange={(e) => setItemCount(e.target.value)}/>
         <button onClick={() => setItemCount(itemCount + 1)}>+</button>
         <button onClick={() => itemCount > 0 ? setItemCount(itemCount - 1) : setItemCount(0)}>-</button>
