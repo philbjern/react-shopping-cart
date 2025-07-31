@@ -1,0 +1,24 @@
+.card, 
+.card img, 
+.card .image {
+  max-width: calc((var(--container-max-width) - var(--grid-padding) * var(--grid-columns-number)) / var(--grid-columns-number));
+}
+
+.card .image {
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+.card .image img {
+  position: absolute;
+
+}
+
+.card h1 {
+  font-size: 1.4rem;
+}
+
+.card img {
+  height: auto;
+}
