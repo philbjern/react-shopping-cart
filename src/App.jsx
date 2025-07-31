@@ -9,6 +9,21 @@ function App() {
   const [itemsInCart, setItemsInCart] = useState(0);
 
   const [cart, setCart] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const NOTIFICATION_TIMEOUT = 3000;
+
+  const notify = (message) => {
+    const id = crypto.randomUUID();
+    const notification = { id, message };
+
+    setNotifications(prev => [...prev, notification]);
+
+    setTimeout(() => {
+      setNotifications(prev =>
+        prev.filter(n => n.id !== id)
+      );
+    }, NOTIFICATION_TIMEOUT);
+  };
 
   const addItemToCart = (product, amount) => {
     if (amount <= 0) return;
@@ -58,13 +73,14 @@ function App() {
   const clearCart = () => {
     setCart([]);
     setItemsInCart(0);
+    notify('Cart cleared');
   }
 
   return (
     <div className="container">
-      <Notifications />
+      <Notifications notifications={notifications}/>
       <Navigation itemsInCart={itemsInCart} />
-      <Outlet context={{ addItemToCart, cart, clearCart }} />
+      <Outlet context={{ addItemToCart, cart, clearCart, notify }} />
     </div>
   )
 }

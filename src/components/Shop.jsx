@@ -11,10 +11,11 @@ const Shop = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const { addItemToCart } = useOutletContext();
+  const { addItemToCart, notify } = useOutletContext();
 
   const handleAddToCart = (product, itemCount) => {
     addItemToCart(product, itemCount);
+    notify(`Item ${product.title} added to cart`)
   }
 
   const fetchData = async (url) => {

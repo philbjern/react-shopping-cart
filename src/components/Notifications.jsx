@@ -1,31 +1,6 @@
-import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Notifications = () => {
-
-  const NOTIFICATION_TIMEOUT = 3000;
-  const hasRun = useRef(false);
-  const [notifications, setNotifications] = useState([]);
-
-  useEffect(() => {
-    if (!hasRun.current) {
-      createNotification('Welcome to the shopping app!')
-      hasRun.current = true;
-    }
-  }, [])
-
-  const createNotification = (message) => {
-    const id = crypto.randomUUID();
-    const notification = { id, message };
-    setNotifications(prev => [...prev, notification]);
-
-    setTimeout(() => {
-      setNotifications((prev) =>
-        prev.filter((item) => item.id !== id)
-      );
-    }, NOTIFICATION_TIMEOUT);
-  }
-
+const Notifications = ({ notifications }) => {
   return (
     <div className="notifications-container">
       <AnimatePresence>
