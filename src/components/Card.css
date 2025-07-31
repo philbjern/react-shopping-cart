@@ -4,6 +4,18 @@
   max-width: calc((var(--container-max-width) - var(--grid-padding) * var(--grid-columns-number)) / var(--grid-columns-number));
 }
 
+.card {
+  background: var(--bg-dark-1);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1 0 auto;
+}
+
 .card .image {
   position: relative;
   overflow: hidden;
@@ -14,7 +26,7 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
-  border-radius: var(--border-radius-01);
+  border-radius: var(--border-radius);
 }
 
 .card h1 {
@@ -26,7 +38,7 @@
 }
 
 .card-content {
-  min-height: 600px;
+  min-height: 400px;
 }
 
 .card .price {
@@ -37,8 +49,8 @@
   display: flex;
   gap: 0.6rem;
   align-items: center;
-  justify-content: center;
-  padding-top: 1rem;
+  justify-content: flex-start;
+  
 }
 
 .card .controls input[type="number"] {
@@ -51,4 +63,11 @@ button {
   background-color: var(--clr-primary-a30);
   color: var(--clr-dark-a0);
   font-size: 0.8rem;
+  margin: 0;
+  border-radius: var(--border-radius);
+  transition: all 300ms ease-out;
+}
+
+button:hover {
+  background-color: var(--clr-primary-a20);
 }

@@ -1,0 +1,35 @@
+.cart-row {
+  margin: 2rem 0;
+  border-bottom: 2px solid var(--clr-surface-a50);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: var(--bg-dark-1);
+  border-radius: var(--border-radius);
+}
+
+.product-title {
+  font-size: 1.5rem;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.cart-row .image {
+  width: 8rem;
+  height: 8rem;
+}
+
+.cart-row .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;;
+}

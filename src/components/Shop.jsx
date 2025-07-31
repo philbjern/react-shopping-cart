@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import './Shop.css'
-const Shop = ({addToCart}) => {
+import { useOutletContext } from "react-router-dom";
+
+const Shop = () => {
 
   const API_URL = `https://fakestoreapi.com`
 
@@ -9,8 +11,10 @@ const Shop = ({addToCart}) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
+  const { addItemToCart } = useOutletContext();
+
   const handleAddToCart = (product, itemCount) => {
-    console.log('adding to cart', product, itemCount);
+    addItemToCart(product, itemCount);
   }
 
   const fetchData = async (url) => {

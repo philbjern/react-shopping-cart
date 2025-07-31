@@ -7,12 +7,10 @@ const Navigation = ({ itemsInCart }) => {
       <h1>🛒 therealschmidley Shop</h1>
       <ul>
         <li><Link to="/shop">Shop</Link></li>
-        <li><Link to="/cart">Cart</Link></li>
-        { itemsInCart ? (
-          <li>Items in cart : {itemsInCart}</li>
-        ) : (
-          <li>No items in cart</li>
-        )}
+        <li><Link to="/cart">Cart</Link> ({
+          itemsInCart ? itemsInCart : 0
+        })
+        { itemsInCart === 1 ? ' item' : ' items' }</li>
       </ul>
     </nav>
   )

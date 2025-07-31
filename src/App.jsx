@@ -7,11 +7,51 @@ function App() {
 
   const [itemsInCart, setItemsInCart] = useState(0);
 
+  const [cart, setCart] = useState([]);
+
+  const addItemToCart = (product, amount) => {
+  if (amount <= 0) return;
+
+  setCart(prevCart => {
+    let newCart;
+
+    const existingItem = prevCart.find(item => item.product.id === product.id);
+
+    if (existingItem) {
+      newCart = prevCart.map(item => {
+        if (item.product.id === product.id) {
+          return { ...item, amount: item.amount + amount };
+        }
+        return item;
+      });
+    } else {
+      newCart = [...prevCart, { product, amount }];
+    }
+
+    setItemsInCart(calculateItemCountInCart(newCart));
+
+    return newCart;
+  });
+};
+
+  const calculateItemCountInCart = (cart) => {
+    let itemCount = 0;
+    cart.forEach(item => {
+      itemCount += item.amount;
+    });
+    return itemCount;
+  }
+
+  const clearCart = () => {
+    setCart([]);
+    setItemsInCart(0);
+  }
+
   return (
-   <div className="container">
-    <Navigation itemsInCart={itemsInCart}/>
-    <Outlet />
-   </div> 
+    <div className="container">
+      <Navigation itemsInCart={itemsInCart} />
+      <Outlet context={{ addItemToCart, cart, clearCart }} />
+    </div>
   )
 }
 
