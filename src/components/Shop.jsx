@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import './Shop.css'
-const Shop = () => {
+const Shop = ({addToCart}) => {
 
   const API_URL = `https://fakestoreapi.com`
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+
+  const handleAddToCart = (product, itemCount) => {
+    console.log('adding to cart', product, itemCount);
+  }
 
   const fetchData = async (url) => {
     const response = await fetch(url);
@@ -40,7 +44,7 @@ const Shop = () => {
       <h2>Shop</h2>
       <div className="cards-container">
         {data && data.map(product => (
-          <Card key={product.id} product={product} />
+          <Card key={product.id} product={product} handleAddToCart={handleAddToCart}/>
         ))}
       </div>
     </div>
