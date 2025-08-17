@@ -38,10 +38,14 @@ const Cart = () => {
     alert('Redirecting to checkout for payment of ' + total + ' USD');
   }
 
+  const calculateTotalItemsInCart = (cart) => {
+    return cart.reduce((sum, item) => sum + item.amount, 0);
+  }
+
   return (
     <div>
       <h2>Cart</h2>
-      <p>Items in cart: {cart.length}</p>
+      <p>Items in cart: {calculateTotalItemsInCart(cart)}</p>
       {cart && cart.map(item => (
         <CartRow key={item.product.id} product={item.product} amount={item.amount} />
       ))}

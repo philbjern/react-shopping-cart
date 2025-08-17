@@ -8,10 +8,10 @@ const CartRow = ({ product, amount }) => {
       </div>
       <div>
         <p>
-          <span className="product-title">{product.title}</span>
+          <span className="product-title">{amount} x {product.title}</span>
         </p>
         <p>
-          <span className="product-price"> price {product.price} USD </span> - 
+          <span className="product-price">{product.price} USD </span> - 
           <span className="amount"> {amount}</span>
           { amount > 1 ? ' items' : ' item'}
         </p>

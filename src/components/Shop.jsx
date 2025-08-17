@@ -15,7 +15,9 @@ const Shop = () => {
 
   const handleAddToCart = (product, itemCount) => {
     addItemToCart(product, itemCount);
-    notify(`Item ${product.title} added to cart`)
+    if (itemCount > 0) {
+      notify(`Added ${itemCount > 1 ? itemCount + 'pieces of' : ''} ${product.title} to cart`)
+    }
   }
 
   const fetchData = async (url) => {
