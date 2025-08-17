@@ -72,3 +72,22 @@ a {
   border-radius: var(--border-radius);
   margin-bottom: 0.8rem;
 }
+
+.pagination {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pagination button {
+  margin: 0 0.8rem;
+}
+
+.page-number {
+  margin: 0 0.4rem;
+  cursor: pointer;
+}
+
+.page-number.active {
+  font-weight: 800;
+  color: var(--clr-primary-a30);
+}
