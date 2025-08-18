@@ -4,7 +4,7 @@ import './Navigation.css';
 const Navigation = ({ itemsInCart }) => {
   return (
     <nav>
-      <h1>🛒 therealschmidley Shop</h1>
+      <h1>🛒 therealschmidley store</h1>
       <ul>
         <li><Link to="/shop">Shop</Link></li>
         <li><Link to="/cart">Cart</Link> ({

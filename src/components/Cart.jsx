@@ -46,6 +46,7 @@ const Cart = () => {
     <div>
       <h2>Cart</h2>
       <p>Items in cart: {calculateTotalItemsInCart(cart)}</p>
+      { cart.length === 0 ? <h2>Your cart is empty</h2> : ''}
       {cart && cart.map(item => (
         <CartRow key={item.product.id} product={item.product} amount={item.amount} />
       ))}
