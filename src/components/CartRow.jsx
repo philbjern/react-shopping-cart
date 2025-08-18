@@ -11,6 +11,9 @@ const CartRow = ({ product, amount }) => {
           <span className="product-title">{amount} x {product.title}</span>
         </p>
         <p>
+          <span className="product-description">{product.description}</span>
+        </p>
+        <p>
           <span className="product-price">{product.price} USD </span> - 
           <span className="amount"> {amount}</span>
           { amount > 1 ? ' items' : ' item'}

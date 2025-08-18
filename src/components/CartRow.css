@@ -24,7 +24,7 @@
 }
 
 .cart-row .image {
-  width: 8rem;
+  min-width: 8rem;
   height: 8rem;
 }
 

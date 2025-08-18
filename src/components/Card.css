@@ -20,6 +20,8 @@
   position: relative;
   overflow: hidden;
   height: 250px;
+  background: var(--clr-surface-a50);
+  border-radius: var(--border-radius);
 }
 
 .card .image img {

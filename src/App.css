@@ -57,15 +57,15 @@ a {
 
 .notifications-container {
   position: absolute;
-  width: 100vh;
   top: 20px;
-  left: 0;
+  left: 20px;
   z-index: 10;
+  background: transparent;
 }
 
 .notification {
-  max-width: 500px;
-  padding: 1rem;
+  max-width: 400px;
+  padding: 0.8rem 1rem;
   margin: 0 auto;
   background-color: var(--clr-primary-a50);
   color: var(--clr-dark-a0);

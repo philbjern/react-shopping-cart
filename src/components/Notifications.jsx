@@ -11,7 +11,7 @@ const Notifications = ({ notifications }) => {
             exit={{ opacity: 0, translateY: -10 }}
             transition={{ duration: 1 }}
             className="notification">
-            {notification.message}
+            ❗{notification.message}
           </motion.div>
         ))}
       </AnimatePresence>

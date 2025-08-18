@@ -35,8 +35,8 @@ vi.mock('react-router-dom', async () => {
   };
 });
 
-// Mock crypto.randomUUID
-globalThis.crypto = { randomUUID: () => 'test-id' };
+// // Mock crypto.randomUUID
+// globalThis.crypto = { randomUUID: () => 'test-id' };
 
 vi.useFakeTimers();
 
