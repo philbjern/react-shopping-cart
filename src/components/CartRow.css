@@ -11,6 +11,7 @@
 
 .product-title {
   font-size: 1.5rem;
+  color: var(--clr-primary-a30);
 }
 
 .product-price {
@@ -26,6 +27,7 @@
 .cart-row .image {
   min-width: 8rem;
   height: 8rem;
+  max-width: 8rem;
 }
 
 .cart-row .image img {

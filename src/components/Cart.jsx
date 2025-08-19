@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Cart.css"
 import CartRow from "./CartRow";
 
@@ -41,6 +42,14 @@ const Cart = () => {
   const calculateTotalItemsInCart = (cart) => {
     return cart.reduce((sum, item) => sum + item.amount, 0);
   }
+
+  if (cart.length === 0) return (
+    <div>
+      <h2>Cart</h2>
+      <h3 className="empty-cart-message">Your cart is empty, put some items in the cart</h3>
+      <Link to="/shop">Go back to the shop</Link>
+    </div>
+  )
 
   return (
     <div>
