@@ -7,7 +7,6 @@ import Notifications from './components/Notifications';
 function App() {
 
   const [itemsInCart, setItemsInCart] = useState(0);
-
   const [cart, setCart] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const NOTIFICATION_TIMEOUT = 3000;

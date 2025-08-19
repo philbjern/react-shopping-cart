@@ -6,14 +6,17 @@ import { useOutletContext } from "react-router-dom";
 const Shop = () => {
 
   const API_URL = `https://fakestoreapi.com`
-  const ITEMS_PER_PAGE = 8;
+  const ITEMS_PER_ROW = 4
+  const ITEMS_PER_PAGE = 2 * ITEMS_PER_ROW;
   
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-
+  const [dataCache, setDataCache] = useState([])
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState('all')
   const { addItemToCart, notify } = useOutletContext();
 
   const handleAddToCart = (product, itemCount) => {
@@ -32,12 +35,45 @@ const Shop = () => {
     return data;
   }
 
+  const getUniqueCategoriesArray = (data) => {
+    let categoriesArr = [];
+    data.forEach(item => {
+      if (!categoriesArr.includes(item.category)) {
+        categoriesArr.push(item.category);
+      }
+    })
+    categoriesArr.unshift('all');
+    return categoriesArr;
+  }
+
+  const filterShopItems = (category) => {
+    if (!category) {
+      return;
+    }
+
+    if (category === 'all') {
+      setData(dataCache);
+      setActiveCategory('all');
+      return;
+    }
+
+    const filteredData = dataCache.filter(item => item.category === category);
+    setData(filteredData);
+    setActiveCategory(category);
+    setPage(1);
+  }
+
   useEffect(() => {
     (async () => {
       try {
         const data = await fetchData(API_URL + '/products');
         console.log(data);
         setData(data);
+        if (!dataCache || dataCache.length === 0) {
+          setDataCache(data);
+        }
+        const categories = getUniqueCategoriesArray(data);
+        setCategories(categories);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -61,6 +97,16 @@ const Shop = () => {
   return (
     <div>
       <h2>Shop</h2>
+      <div className="categories-container">
+        <b>Categories</b>
+        <ul>
+          {categories && categories.map((category, index) => {
+            const styles = [ activeCategory === category ? 'active' : '']
+            return (<li onClick={() => filterShopItems(category)} className={styles.join(' ')} key={index}>{category}</li>)
+          })}
+
+        </ul>
+      </div>
       <div className="cards-container">
         {data && data.map((product, index) => (
           index >= (page - 1) * ITEMS_PER_PAGE && index < page * ITEMS_PER_PAGE && 

@@ -4,3 +4,26 @@
   gap: 1rem;
   padding: 1rem;
 }
+
+.categories-container {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem
+}
+
+.categories-container ul {
+  list-style: none;
+  padding: 0;
+  margin-left: 1rem;
+}
+
+.categories-container li {
+  display: inline-block;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.categories-container li.active {
+  font-weight: bold;
+  color: var(--clr-primary-a20);
+}
