@@ -16,6 +16,7 @@ const Shop = () => {
   const [data, setData] = useState(null);
   const [dataCache, setDataCache] = useState([])
   const [categories, setCategories] = useState([]);
+  const [categoriesCount, setCategoriesCount] = useState({'all': dataCache.length})
   const [activeCategory, setActiveCategory] = useState('all')
   const { addItemToCart, notify } = useOutletContext();
 
@@ -37,13 +38,26 @@ const Shop = () => {
 
   const getUniqueCategoriesArray = (data) => {
     let categoriesArr = [];
+    categoriesArr.push('all');
+    let catCount = {'all': data.length}
     data.forEach(item => {
       if (!categoriesArr.includes(item.category)) {
         categoriesArr.push(item.category);
       }
+      if (!catCount[sanitaze(item.category)]) {
+        catCount[sanitaze(item.category)] = 1;
+      } else {
+        catCount[sanitaze(item.category)]++;
+      }
     })
-    categoriesArr.unshift('all');
+    setCategoriesCount(catCount);
+    console.log(categoriesCount)
     return categoriesArr;
+  }
+
+  const sanitaze = (input) => {
+    // remove all non small letters characters from input
+    return input.replace(/[^a-z]/g, '');
   }
 
   const filterShopItems = (category) => {
@@ -102,7 +116,7 @@ const Shop = () => {
         <ul>
           {categories && categories.map((category, index) => {
             const styles = [ activeCategory === category ? 'active' : '']
-            return (<li onClick={() => filterShopItems(category)} className={styles.join(' ')} key={index}>{category}</li>)
+            return (<li onClick={() => filterShopItems(category)} className={styles.join(' ')} key={index}>{category} ({categoriesCount[sanitaze(category)]})</li>)
           })}
 
         </ul>
