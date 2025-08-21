@@ -8,10 +8,8 @@ const Navigation = ({ itemsInCart }) => {
       <ul>
         <li><Link to="/shop">Shop</Link></li>
         <li><Link to="/cart">Cart</Link></li>
-        <li>{
-          itemsInCart ? itemsInCart : 0
-        }
-        { itemsInCart === 1 ? ' item' : ' items' } in cart</li>
+        <li>{ itemsInCart ? itemsInCart : 'No'} { itemsInCart === 1 ? ' item' : ' items' } in cart</li>
+        <li><Link to="/login">Login</Link></li>
       </ul>
     </nav>
   )
