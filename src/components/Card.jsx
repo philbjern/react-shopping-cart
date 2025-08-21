@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Card.css";
 
 const Card = ({ product, handleAddToCart }) => {
@@ -21,7 +22,7 @@ const Card = ({ product, handleAddToCart }) => {
         <div className="image">
           <img src={product.image} alt={product.title} />
         </div>
-        <h1>{product.title}</h1>
+        <h1><Link to={'./' + product.id}>{product.title}</Link></h1>
         <p className="description">{truncateDescription(product.description, DESCR_WORD_COUNT)}</p>
         </div>
         <div>

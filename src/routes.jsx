@@ -1,7 +1,7 @@
 import App from "./App";
 import ErrorPage from "./ErrorPage";
 import Cart from "./components/Cart";
-import ProductDetailView from "./components/ItemDetailView";
+import ProductDetailView from "./components/ProductDetailView";
 import Shop from "./components/Shop";
 import { Navigate } from "react-router-dom";
 

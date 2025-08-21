@@ -91,3 +91,18 @@ a {
   font-weight: 800;
   color: var(--clr-primary-a30);
 }
+
+.product-detail .controls {
+  margin: 2rem 0;
+}
+
+.product-detail-image-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.product-detail-image-container img {
+  min-width: 50%;
+  height: auto;
+}

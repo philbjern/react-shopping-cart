@@ -1,14 +1,57 @@
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 
 const ProductDetailView = () => {
   const { productId } = useParams();
-  const { products } = useContext();
+  const [product, setProduct] = useState({})
+  const { data } = useOutletContext();
+  const [ loading, setLoading ] = useState(true);
+  const [ error, setError ] = useState(false);
+
+  useEffect(() => {
+    if (data && productId) {
+      console.log(data)
+      const product = getProductById(data, parseInt(productId));
+      console.log(product);
+      setProduct(product);
+      setLoading(false);
+    } else {
+      setError(true);
+    }
+  }, [data, productId]);
+
+  const getProductById = (data, id) => {
+    const product = data.find(item => item.id === id);
+    return product;
+  }
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
 
   return (
-    <div>
-      <h1>Product detail view</h1>
-      <p>Product id: {productId}</p>
+    <div className="product-detail">
+      <p><button onClick={() => window.history.back()}>Back</button></p>
+      <h1>{product.title}</h1>
+      <p>Category: {product.category}</p>
+      <div className="product-detail-image-container">
+        <img src={product.image} alt={product.title} />
+        <div>
+          <p>{product.description}</p>
+
+          <div className="price">
+            Price: {product.price} USD
+          </div>
+          <div className="rating">
+            Rating: {product.rating.rate} out of {product.rating.count} reviews
+          </div>
+
+          <div className="controls">
+            <button>Buy</button>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   )
 }
