@@ -9,7 +9,46 @@ function App() {
   const [itemsInCart, setItemsInCart] = useState(0);
   const [cart, setCart] = useState([]);
   const [notifications, setNotifications] = useState([]);
+
+  const [data, setData] = useState(null);
+  const [dataCache, setDataCache] = useState([])
+
+  const [categories, setCategories] = useState([]);
+  const [categoriesCount, setCategoriesCount] = useState({ 'all': dataCache.length })
+  const [activeCategory, setActiveCategory] = useState('all')
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  const API_URL = `https://fakestoreapi.com`
   const NOTIFICATION_TIMEOUT = 3000;
+
+  const fetchData = async (url) => {
+    const response = await fetch(url);
+    if (response.status !== 200) {
+      throw new Error('Fetching data from API failed');
+    }
+    const data = await response.json();
+    return data;
+  }
+
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await fetchData(API_URL + '/products');
+        console.log(data);
+        setData(data);
+        if (!dataCache || dataCache.length === 0) {
+          setDataCache(data);
+        }
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    })();
+  }, [])
 
   const notify = (message) => {
     const id = crypto.randomUUID();
@@ -75,11 +114,14 @@ function App() {
     notify('Cart cleared');
   }
 
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
+
   return (
     <div className="container">
-      <Notifications notifications={notifications}/>
+      <Notifications notifications={notifications} />
       <Navigation itemsInCart={itemsInCart} />
-      <Outlet context={{ addItemToCart, cart, clearCart, notify }} />
+      <Outlet context={{ data, setData, dataCache, setDataCache, addItemToCart, cart, clearCart, notify }} />
     </div>
   )
 }
