@@ -83,9 +83,9 @@ function App() {
       }
 
       setItemsInCart(calculateItemCountInCart(newCart));
-
       return newCart;
     });
+    notify(`Added ${amount > 1 ? amount + 'pieces of' : ''} ${product.title} to cart`);
   };
 
   // const userId = 11;

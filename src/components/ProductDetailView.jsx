@@ -7,6 +7,12 @@ const ProductDetailView = () => {
   const { data } = useOutletContext();
   const [ loading, setLoading ] = useState(true);
   const [ error, setError ] = useState(false);
+  const [ itemCount, setItemCount ] = useState(1);
+  const { addItemToCart } = useOutletContext();
+
+  const handleAddToCart = (product, itemCount) => {
+    addItemToCart(product, itemCount);
+  }
 
   useEffect(() => {
     if (data && productId) {
@@ -46,7 +52,10 @@ const ProductDetailView = () => {
           </div>
 
           <div className="controls">
-            <button>Buy</button>
+            <input type="number" value={itemCount} onChange={(e) => setItemCount(e.target.value)}/>
+            <button onClick={() => setItemCount(itemCount + 1)}>+</button>
+            <button onClick={() => itemCount > 0 ? setItemCount(itemCount - 1) : setItemCount(0)}>-</button>
+            <button onClick={() => handleAddToCart(product, itemCount)} className="flex-1">Buy</button>
           </div>
 
         </div>
