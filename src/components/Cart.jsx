@@ -6,7 +6,7 @@ import CartRow from "./CartRow";
 
 const Cart = () => {
 
-  const { cart, clearCart } = useOutletContext();
+  const { cart, clearCart, removeItemsFromCart } = useOutletContext();
   const [total, setTotal] = useState(0);
 
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ const Cart = () => {
       <p>Items in cart: {calculateTotalItemsInCart(cart)}</p>
       { cart.length === 0 ? <h2>Your cart is empty</h2> : ''}
       {cart && cart.map(item => (
-        <CartRow key={item.product.id} product={item.product} amount={item.amount} />
+        <CartRow key={item.product.id} product={item.product} amount={item.amount} removeItemsFromCart={removeItemsFromCart}/>
       ))}
       <p>Total: <span className="total">{total} USD</span></p>
       <div className="cart-controls">

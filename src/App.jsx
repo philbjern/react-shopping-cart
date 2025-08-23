@@ -13,10 +13,6 @@ function App() {
   const [data, setData] = useState(null);
   const [dataCache, setDataCache] = useState([])
 
-  const [categories, setCategories] = useState([]);
-  const [categoriesCount, setCategoriesCount] = useState({ 'all': dataCache.length })
-  const [activeCategory, setActiveCategory] = useState('all')
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -31,7 +27,6 @@ function App() {
     const data = await response.json();
     return data;
   }
-
 
   useEffect(() => {
     (async () => {
@@ -88,6 +83,25 @@ function App() {
     notify(`Added ${amount > 1 ? amount + 'pieces of' : ''} ${product.title} to cart`);
   };
 
+  const removeItemsFromCart = (product, amount) => {
+    if (amount <= 0) return;
+    if (confirm(`Are you sure you want to remove ${amount > 1 ? amount + 'pieces of' : ''} ${product.title} from the cart?`)) {
+      setCart(prevCart => {
+        const newCart = prevCart.filter(item => item.product.id !== product.id);
+        return newCart;
+      })
+      notify(`Removed ${product.title} from cart`)
+    } else {
+      return;
+    }
+  }
+
+  useEffect(() => {
+    if (cart) {
+      setItemsInCart(calculateItemCountInCart(cart));
+    }
+  }, [cart])
+
   // const userId = 11;
 
   // useEffect(() => {
@@ -121,7 +135,7 @@ function App() {
     <div className="container">
       <Notifications notifications={notifications} />
       <Navigation itemsInCart={itemsInCart} />
-      <Outlet context={{ data, setData, dataCache, setDataCache, addItemToCart, cart, clearCart, notify }} />
+      <Outlet context={{ data, setData, dataCache, setDataCache, addItemToCart, removeItemsFromCart, cart, clearCart, notify }} />
     </div>
   )
 }
