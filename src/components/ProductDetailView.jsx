@@ -11,7 +11,7 @@ const ProductDetailView = () => {
   const { addItemToCart } = useOutletContext();
 
   const handleAddToCart = (product, itemCount) => {
-    addItemToCart(product, itemCount);
+    addItemToCart(product, parseInt(itemCount));
   }
 
   useEffect(() => {

@@ -84,7 +84,7 @@ function App() {
 
   const removeItemsFromCart = (product, amount) => {
     if (amount <= 0) return;
-    if (confirm(`Are you sure you want to remove ${amount > 1 ? amount + 'pieces of' : ''} ${product.title} from the cart?`)) {
+    if (confirm(`Are you sure you want to remove ${amount > 1 ? amount + ' pieces of' : ''} ${product.title} from the cart?`)) {
       setCart(prevCart => {
         const newCart = prevCart.filter(item => item.product.id !== product.id);
         return newCart;
