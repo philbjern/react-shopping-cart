@@ -73,6 +73,25 @@ a {
   margin-bottom: 0.8rem;
 }
 
+
+button {
+  background-color: var(--clr-primary-a30);
+  color: var(--clr-dark-a0);
+  font-size: 0.8rem;
+  margin: 0;
+  border-radius: var(--border-radius);
+  border: 2px solid transparent;
+  transition: all 300ms ease-out;
+}
+
+button:hover {
+  background-color: transparent;
+  color: var(--clr-primary-a30);
+  border: 2px solid var(--clr-primary-a30);
+}
+
+
+
 .pagination {
   text-align: center;
   margin-top: 2rem;

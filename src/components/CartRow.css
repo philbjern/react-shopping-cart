@@ -26,15 +26,18 @@
 }
 
 .cart-row .image {
-  min-width: 8rem;
-  height: 8rem;
-  max-width: 8rem;
+  min-width: 12rem;
+  height: 12rem;
+  max-width: 12rem;
+  background: var(--clr-surface-a50);
+  border-radius: var(--border-radius);
 }
 
 .cart-row .image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;;
+  object-fit: cover;
+  border-radius: var(--border-radius);
 }
 
 .remove-button-container {

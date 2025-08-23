@@ -16,9 +16,7 @@ const ProductDetailView = () => {
 
   useEffect(() => {
     if (data && productId) {
-      console.log(data)
       const product = getProductById(data, parseInt(productId));
-      console.log(product);
       setProduct(product);
       setLoading(false);
     } else {

@@ -15,7 +15,7 @@ const Shop = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { addItemToCart, notify, data, setData, dataCache, setDataCache, } = useOutletContext();
+  const { addItemToCart, data, setData, dataCache } = useOutletContext();
 
   const [categories, setCategories] = useState([]);
   const [categoriesCount, setCategoriesCount] = useState({ 'all': dataCache.length })
@@ -24,11 +24,7 @@ const Shop = () => {
 
   const handleAddToCart = (product, itemCount) => {
     addItemToCart(product, itemCount);
-    // if (itemCount > 0) {
-    //   notify(`Added ${itemCount > 1 ? itemCount + 'pieces of' : ''} ${product.title} to cart`)
-    // }
   }
-
 
   const filterShopItems = (category) => {
     if (!category) {
@@ -55,27 +51,27 @@ const Shop = () => {
       if (!categoriesArr.includes(item.category)) {
         categoriesArr.push(item.category);
       }
-      if (!catCount[sanitaze(item.category)]) {
-        catCount[sanitaze(item.category)] = 1;
+      if (!catCount[makeCategoryId(item.category)]) {
+        catCount[makeCategoryId(item.category)] = 1;
       } else {
-        catCount[sanitaze(item.category)]++;
+        catCount[makeCategoryId(item.category)]++;
       }
     })
     setCategoriesCount(catCount);
-    console.log(categoriesCount)
     return categoriesArr;
   }
 
-  const sanitaze = (input) => {
+  const makeCategoryId = (input) => {
     // remove all non small letters characters from input
     return input.replace(/[^a-z]/g, '');
   }
 
   useEffect(() => {
-    if (data) {
-      const categories = getUniqueCategoriesArray(data);
+    if (dataCache) {
+      const categories = getUniqueCategoriesArray(dataCache);
       setCategories(categories);
     }
+    console.log(activeCategory)
   }, [])
 
   useEffect(() => {
@@ -85,7 +81,6 @@ const Shop = () => {
       setTotalPages(pages);
       setLoading(false);
     }
-    console.log(totalPages);
   }, [data])
 
   if (loading) return <p>Loading...</p>
@@ -99,7 +94,7 @@ const Shop = () => {
         <ul>
           {categories && categories.map((category, index) => {
             const styles = [activeCategory === category ? 'active' : '']
-            return (<li onClick={() => filterShopItems(category)} className={styles.join(' ')} key={index}>{category} ({categoriesCount[sanitaze(category)]})</li>)
+            return (<li onClick={() => filterShopItems(category)} className={styles.join(' ')} key={index}>{category} ({categoriesCount[makeCategoryId(category)]})</li>)
           })}
 
         </ul>

@@ -32,7 +32,6 @@ function App() {
     (async () => {
       try {
         const data = await fetchData(API_URL + '/products');
-        console.log(data);
         setData(data);
         if (!dataCache || dataCache.length === 0) {
           setDataCache(data);
