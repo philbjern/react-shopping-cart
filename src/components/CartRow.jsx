@@ -1,6 +1,6 @@
 import "./CartRow.css";
 
-const CartRow = ({ product, amount, removeItemsFromCart }) => {
+const CartRow = ({ product, amount, removeItemsFromCart, modalRef }) => {
   return (
     <div className="cart-row">
       <div className="display-flex">

@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { navigate, useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Cart.css"
 import CartRow from "./CartRow";
 
 const Cart = () => {
 
-  const { cart, clearCart, removeItemsFromCart, modalRef } = useOutletContext();
+  const { cart, removeItemsFromCart, clearCart, modalRef } = useOutletContext();
   const [total, setTotal] = useState(0);
-
-  const navigate = useNavigate();
 
   const calculateTotal = (cart) => {
     let total = 0;
@@ -28,13 +26,16 @@ const Cart = () => {
   const handleClearCartClick = () => {
     if (cart.length === 0) return;
 
-    modalRef.current.show("Are you sure you want to clear the cart?");
-    
-    // if (confirm('Are you shure you want to clear the cart?')) {
-    //   clearCart();
-    //   setTotal(0);
-    //   navigate('/shop');
-    // }
+    modalRef.current.show(
+      "Are you sure you want to clear the cart?", 
+      () => {
+        clearCart();
+        setTotal(0);
+        navigate('/shop');
+      }, () => {
+        console.log('Clear cart canceled');
+      }
+    );
   }
 
   const handleCheckout = () => {

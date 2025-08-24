@@ -60,6 +60,10 @@ function App() {
     }, NOTIFICATION_TIMEOUT);
   };
 
+  const confirmAction = (message, onConfirm, onAbort) => {
+    modalRef.current.show(message, onConfirm, onAbort);
+  };
+
   const addItemToCart = (product, amount) => {
     if (amount <= 0) return;
 
@@ -87,15 +91,22 @@ function App() {
 
   const removeItemsFromCart = (product, amount) => {
     if (amount <= 0) return;
-    if (confirm(`Are you sure you want to remove ${amount > 1 ? amount + ' pieces of' : ''} ${product.title} from the cart?`)) {
-      setCart(prevCart => {
-        const newCart = prevCart.filter(item => item.product.id !== product.id);
-        return newCart;
-      })
-      notify(`Removed ${product.title} from cart`)
-    } else {
-      return;
-    }
+    const message = `Are you sure you want to remove ${amount > 1 ? amount + ' pieces of' : ''} ${product.title} from the cart?`;
+
+    modalRef.current.show(
+      message,
+      () => {
+        setCart(prevCart => {
+          const newCart = prevCart.filter(item => item.product.id !== product.id);
+          return newCart;
+        })
+        notify(`Removed ${product.title} from cart`)
+      },
+      () => {
+        console.log(`Canceled removing ${product.title} from cart`);
+        return;
+      }
+    )
   }
 
   useEffect(() => {

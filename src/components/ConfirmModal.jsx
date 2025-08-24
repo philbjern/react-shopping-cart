@@ -1,13 +1,17 @@
 import { useImperativeHandle, forwardRef, useState, useEffect } from "react";
 
-const ConfirmModal = forwardRef(({ confirm, abort }, ref) => {
+const ConfirmModal = forwardRef((props, ref) => {
   const [styles, setStyles] = useState(["modal-container"]);
   const [message, setMessage] = useState("");
   const [isVisible, setVisible] = useState(false);
-
+  const [onConfirmHandler, setOnConfirmHandler] = useState(() => {});
+  const [onAbortHandler, setOnAbortHandler] = useState(() => {});
+  
   useImperativeHandle(ref, () => ({
-    show(msg) {
+    show(msg, onConfirm = () => {}, onAbort = () => {}) {
       setMessage(msg);
+      setOnConfirmHandler(() => onConfirm);
+      setOnAbortHandler(() => onAbort);
       setStyles(["modal-container", "show"]);
       setVisible(true);
     },
@@ -17,21 +21,22 @@ const ConfirmModal = forwardRef(({ confirm, abort }, ref) => {
     },
   }));
 
-  const onConfirm = () => {
+  const handleConfirm = () => {
     ref.current.hide();
-    confirm?.();
+    console.log(onConfirmHandler);
+    onConfirmHandler();
   };
 
-  const onAbort = () => {
+  const handleAbort = () => {
     ref.current.hide();
-    abort?.();
+    onAbortHandler();
   };
 
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape" && isVisible) {
         ref.current.hide();
-        abort?.();
+        onAbortHandler();
       }
     };
 
@@ -42,15 +47,15 @@ const ConfirmModal = forwardRef(({ confirm, abort }, ref) => {
     return () => {
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [isVisible, abort, ref])
+  }, [isVisible, ref])
 
   return (
-    <div className={styles.join(' ')} onClick={onAbort}>
+    <div className={styles.join(' ')} onClick={handleAbort}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <p>{message}</p>
         <div className="modal-buttons">
-          <button onClick={onConfirm}>Yes</button>
-          <button onClick={onAbort}>No</button>
+          <button onClick={handleConfirm}>Yes</button>
+          <button onClick={handleAbort}>No</button>
         </div>
       </div>
     </div>
