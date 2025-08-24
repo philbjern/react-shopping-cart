@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom'
+import { useEffect, useState, useRef } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom'
 import './App.css'
 import Navigation from './components/Navigation'
 import Notifications from './components/Notifications';
+import ConfirmModal from './components/ConfirmModal';
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
+  const navigate = useNavigate();
+
   const API_URL = `https://fakestoreapi.com`
   const NOTIFICATION_TIMEOUT = 3000;
 
@@ -79,7 +82,7 @@ function App() {
       setItemsInCart(calculateItemCountInCart(newCart));
       return newCart;
     });
-    notify(`Added ${amount > 1 ? amount + 'pieces of' : ''} ${product.title} to cart`);
+    notify(`Added ${amount > 1 ? amount + ' pieces of' : ''} ${product.title} to cart`);
   };
 
   const removeItemsFromCart = (product, amount) => {
@@ -127,14 +130,23 @@ function App() {
     notify('Cart cleared');
   }
 
+  const modalRef = useRef();
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
 
   return (
     <div className="container">
+      <ConfirmModal
+        ref={modalRef}
+        confirm={() => {
+          clearCart();
+          navigate('/shop')
+        }}
+        abort={() => console.log('Clear cart canceled')} />
       <Notifications notifications={notifications} />
       <Navigation itemsInCart={itemsInCart} />
-      <Outlet context={{ data, setData, dataCache, setDataCache, addItemToCart, removeItemsFromCart, cart, clearCart, notify }} />
+      <Outlet context={{ data, setData, dataCache, setDataCache, addItemToCart, removeItemsFromCart, cart, clearCart, notify, modalRef }} />
     </div>
   )
 }

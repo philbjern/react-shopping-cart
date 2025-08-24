@@ -6,7 +6,7 @@ import CartRow from "./CartRow";
 
 const Cart = () => {
 
-  const { cart, clearCart, removeItemsFromCart } = useOutletContext();
+  const { cart, clearCart, removeItemsFromCart, modalRef } = useOutletContext();
   const [total, setTotal] = useState(0);
 
   const navigate = useNavigate();
@@ -27,11 +27,14 @@ const Cart = () => {
 
   const handleClearCartClick = () => {
     if (cart.length === 0) return;
-    if (confirm('Are you shure you want to clear the cart?')) {
-      clearCart();
-      setTotal(0);
-      navigate('/shop');
-    }
+
+    modalRef.current.show("Are you sure you want to clear the cart?");
+    
+    // if (confirm('Are you shure you want to clear the cart?')) {
+    //   clearCart();
+    //   setTotal(0);
+    //   navigate('/shop');
+    // }
   }
 
   const handleCheckout = () => {
