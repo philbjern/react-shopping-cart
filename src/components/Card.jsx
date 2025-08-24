@@ -30,7 +30,7 @@ const Card = ({ product, handleAddToCart }) => {
       </div>
       <div className="controls">
         <input type="number" value={itemCount} onChange={(e) => setItemCount(e.target.value)}/>
-        <button onClick={() => itemCount > 0 ? setItemCount(itemCount - 1) : setItemCount(0)}>-</button>
+        <button onClick={() => itemCount > 1 ? setItemCount(itemCount - 1) : setItemCount(1)}>-</button>
         <button onClick={() => setItemCount(itemCount + 1)}>+</button>
         <button onClick={() => handleAddToCart(product, itemCount)} className="flex-1">Buy</button>
       </div>
