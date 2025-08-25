@@ -5,9 +5,9 @@ const ProductDetailView = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({})
   const { data } = useOutletContext();
-  const [ loading, setLoading ] = useState(true);
-  const [ error, setError ] = useState(false);
-  const [ itemCount, setItemCount ] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [itemCount, setItemCount] = useState(1);
   const { addItemToCart } = useOutletContext();
 
   const handleAddToCart = (product, itemCount) => {
@@ -29,6 +29,19 @@ const ProductDetailView = () => {
     return product;
   }
 
+  const getStarsRatingString = (rating) => {
+    let stars = '';
+    for (let i = 0; i < 5; i++) {
+      if (i < Math.floor(rating)) {
+        stars += '★';
+      } else {
+        stars += '☆';
+      }
+    }
+    return stars;
+  }
+
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
 
@@ -43,14 +56,15 @@ const ProductDetailView = () => {
           <p>{product.description}</p>
 
           <div className="price">
-            Price: {product.price} USD
+            Price: <span className="text-big">{product.price} USD</span>
           </div>
+
           <div className="rating">
-            Rating: {product.rating.rate} out of {product.rating.count} reviews
+            Rating: <span className="rating-stars">{getStarsRatingString(product.rating.rate)}</span> {product.rating.rate} out of {product.rating.count} reviews
           </div>
 
           <div className="controls">
-            <input type="number" value={itemCount} onChange={(e) => setItemCount(e.target.value)}/>
+            <input type="number" value={itemCount} onChange={(e) => setItemCount(e.target.value)} />
             <button onClick={() => setItemCount(itemCount + 1)}>+</button>
             <button onClick={() => itemCount > 0 ? setItemCount(itemCount - 1) : setItemCount(0)}>-</button>
             <button onClick={() => handleAddToCart(product, itemCount)} className="flex-1">Buy</button>
@@ -63,4 +77,4 @@ const ProductDetailView = () => {
   )
 }
 
-export default ProductDetailView;
+export default ProductDetailView

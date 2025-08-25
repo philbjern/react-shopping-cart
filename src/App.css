@@ -227,3 +227,12 @@ button:hover {
   top: 0;
   left: 0;
 }
+
+.rating-stars {
+  font-size: 1.9rem;
+  color: goldenrod;
+}
+
+.text-big {
+  font-size: 1.9rem;
+}
