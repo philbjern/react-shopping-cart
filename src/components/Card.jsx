@@ -4,16 +4,17 @@ import "./Card.css";
 
 const Card = ({ product, handleAddToCart }) => {
 
-  const DESCR_WORD_COUNT = "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day".split(' ').length;
-
+  const DESCR_WORD_COUNT = "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.".split(' ').length;
+  
   const [itemCount, setItemCount] = useState(1);
 
   const truncateDescription = (description, wordCount) => {
     const words = description.split(' ');
+    if (words.length <= wordCount) return description;
     const truncatedWords = words.slice(0, wordCount);
-    truncatedWords.push('...')
     const truncatedDescription = truncatedWords.join(' ');
-    return truncatedDescription;
+
+    return truncatedDescription + '...';
   }
 
   return (

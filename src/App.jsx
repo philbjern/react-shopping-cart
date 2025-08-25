@@ -112,6 +112,9 @@ function App() {
   useEffect(() => {
     if (cart) {
       setItemsInCart(calculateItemCountInCart(cart));
+      sessionStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      setCart(JSON.parse(sessionStorage.getItem('cart')));
     }
   }, [cart])
 
@@ -143,8 +146,8 @@ function App() {
 
   const modalRef = useRef();
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
+  if (loading) return <div className="loading-div">Loading...</div>
+  if (error) return <div className="error-div">Error: {error}</div>
 
   return (
     <div className="container">

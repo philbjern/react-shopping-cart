@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { navigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Cart.css"
 import CartRow from "./CartRow";
@@ -8,6 +8,7 @@ const Cart = () => {
 
   const { cart, removeItemsFromCart, clearCart, modalRef } = useOutletContext();
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   const calculateTotal = (cart) => {
     let total = 0;
@@ -50,7 +51,9 @@ const Cart = () => {
   if (cart.length === 0) return (
     <div>
       <h2>Cart</h2>
-      <h3 className="empty-cart-message">Your cart is empty, put some items in the cart</h3>
+      <div className="empty-cart-message">
+        <h3>Your cart is empty, put some items in the cart</h3>
+      </div>
       <Link to="/shop">Go back to the shop</Link>
     </div>
   )

@@ -45,6 +45,7 @@
 
 .card .price {
   font-size: 1.6rem;
+  margin: 0.8rem 0;
 }
 
 .card .controls {
