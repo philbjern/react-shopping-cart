@@ -1,0 +1,38 @@
+.login-page {
+
+}
+
+.login-page .form-container {
+  max-width: 300px;
+  margin: 8rem auto;
+  background: var(--clr-surface-a30);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 0.5rem 0.8rem;
+  border: 0;
+  border-radius: var(--border-radius);
+  background: var(--clr-surface-a20);
+  width: auto;
+}
+
+.login-page form .formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.login-page button {
+  justify-self: center;
+}

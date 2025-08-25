@@ -3,6 +3,7 @@ import ErrorPage from "./ErrorPage";
 import Cart from "./components/Cart";
 import ProductDetailView from "./components/ProductDetailView";
 import Shop from "./components/Shop";
+import LoginPage from "./components/LoginPage";
 import { Navigate } from "react-router-dom";
 
 const routes = [
@@ -27,7 +28,14 @@ const routes = [
         path: 'cart',
         element: <Cart />
       },
-
+      {
+        path: 'login',
+        element: <LoginPage />
+      },
+      {
+        path: '*',
+        element: <Navigate to="/shop" replace />
+      }
     ]
   },
 ]
