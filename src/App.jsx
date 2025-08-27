@@ -32,12 +32,11 @@ function App() {
   }
 
   const saveCart = (cart) => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    sessionStorage.setItem('cart', JSON.stringify(cart));
   }
 
   const loadCart = () => {
-    console.log(JSON.parse(localStorage.getItem('cart')));
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(sessionStorage.getItem('cart'));
     if (cart) {
       setCart(cart);
       setItemsInCart(calculateItemCountInCart(cart));
@@ -141,16 +140,10 @@ function App() {
   }
 
   useEffect(() => {
-    console.log('cart', cart);
-    if (cart) {
-      setItemsInCart(calculateItemCountInCart(cart));
-    }
-  }, [cart])
-
-  useEffect(() => {
     if (cart.length !== 0) {
       console.log('Saving updated cart to localStorage', cart);
       saveCart(cart);
+      setItemsInCart(calculateItemCountInCart(cart));
     }
   }, [cart])
 
