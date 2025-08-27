@@ -31,6 +31,20 @@ function App() {
     return data;
   }
 
+  const saveCart = (cart) => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  const loadCart = () => {
+    console.log(JSON.parse(localStorage.getItem('cart')));
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart) {
+      setCart(cart);
+      setItemsInCart(calculateItemCountInCart(cart));
+    }
+    return cart;
+  }
+
   useEffect(() => {
     (async () => {
       try {
@@ -38,7 +52,8 @@ function App() {
         setData(data);
         if (!dataCache || dataCache.length === 0) {
           setDataCache(data);
-        }
+        } 
+        loadCart();
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -51,12 +66,13 @@ function App() {
     const id = crypto.randomUUID();
     const notification = { id, message };
 
-    setNotifications(prev => [...prev, notification]);
+    setNotifications(prev => [notification, ...prev]);
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setNotifications(prev =>
         prev.filter(n => n.id !== id)
       );
+      clearTimeout(timeout);
     }, NOTIFICATION_TIMEOUT);
   };
 
@@ -109,27 +125,6 @@ function App() {
     )
   }
 
-  useEffect(() => {
-    if (cart) {
-      setItemsInCart(calculateItemCountInCart(cart));
-      sessionStorage.setItem('cart', JSON.stringify(cart));
-    } else {
-      setCart(JSON.parse(sessionStorage.getItem('cart')));
-    }
-  }, [cart])
-
-  // const userId = 11;
-
-  // useEffect(() => {
-  //   fetch('https://fakestoreapi.com/carts/' + userId)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     setCart(data.products);
-  //     setItemsInCart(calculateItemCountInCart(data.products));
-  //   })
-  // }, [])
-
   const calculateItemCountInCart = (cart) => {
     let itemCount = 0;
     cart.forEach(item => {
@@ -141,8 +136,24 @@ function App() {
   const clearCart = () => {
     setCart([]);
     setItemsInCart(0);
+    saveCart([]);
     notify('Cart cleared');
   }
+
+  useEffect(() => {
+    console.log('cart', cart);
+    if (cart) {
+      setItemsInCart(calculateItemCountInCart(cart));
+    }
+  }, [cart])
+
+
+  useEffect(() => {
+    if (cart) {
+      console.log('Saving updated cart to localStorage', cart);
+      saveCart(cart);
+    }
+  }, [cart])
 
   const modalRef = useRef();
 

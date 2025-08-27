@@ -65,6 +65,8 @@ a {
 
 .notification {
   max-width: 400px;
+  min-width: 400px;
+  width: 100%;
   padding: 0.8rem 1rem;
   margin: 0 auto;
   background-color: var(--clr-primary-a50);
@@ -89,8 +91,6 @@ button:hover {
   color: var(--clr-primary-a30);
   border: 2px solid var(--clr-primary-a30);
 }
-
-
 
 .pagination {
   text-align: center;
