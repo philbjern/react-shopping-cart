@@ -147,13 +147,16 @@ function App() {
     }
   }, [cart])
 
-
   useEffect(() => {
-    if (cart) {
+    if (cart.length !== 0) {
       console.log('Saving updated cart to localStorage', cart);
       saveCart(cart);
     }
   }, [cart])
+
+  useEffect(() => {
+    loadCart();
+  }, [])
 
   const modalRef = useRef();
 
